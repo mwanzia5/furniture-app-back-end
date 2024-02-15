@@ -36,7 +36,7 @@ users=[{
   "email": "hmatz4@mlb.com",
   "phone_number": "942-904-6178",
   "role": "member",
-  "password": "qO8(59FfGW"
+  "password": "qO8(59FfGW)"
 
 }, {
   "id": 6,
