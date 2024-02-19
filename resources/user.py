@@ -30,14 +30,14 @@ class SignUpResource(Resource):
     @marshal_with(user_fields)
     def get(self, id=None):
         if id:
-            user=UserModel.query.filter_by(id=id).first();
+            user=UserModel.query.filter_by(id=id).first()
             if user is not None:
                 return user, 200 
             else:
                 abort(404, error="User does not exist")
     
         else:
-            users= UserModel.query.all();
+            users= UserModel.query.all()
             return users
     
     @marshal_with(response_field)
