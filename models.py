@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import check_password_hash
 
+from sqlalchemy.orm import validates
 
 db=SQLAlchemy()
 
@@ -61,6 +62,17 @@ class OrderModel(db.Model):
     product_id=db.Column(db.Integer,db.ForeignKey("products.id"),nullable=False) 
     total_price=db.Column(db.Float,nullable=False)
     status=db.Column(db.String,nullable=False)
-    payment_method=db.Column(db.String,nullable=False)
     order_at=db.Column(db.TIMESTAMP(),default=db.func.now())
+    payment = db.relationship('PaymentModel', backref='orders')
     
+class PaymentModel(db.Model):
+    __tablename__ = 'payments'
+    id = db.Column(db.Integer, primary_key=True)
+    amount = db.Column(db.Float)
+    payment_type = db.Column(db.String(50), nullable=False)
+    status = db.Column(db.String(50), nullable=False)
+    payment_date = db.Column(db.DateTime, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    order_id = db.Column(db.Integer, db.ForeignKey('orders.id'), nullable=False)
+    
+
