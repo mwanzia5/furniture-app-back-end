@@ -78,7 +78,7 @@ class SignUpResource(Resource):
 
     @jwt_required()
     def delete(self, id):
-        if current_user['role'] != 'admin':
+        if current_user['role'] != 'member':
             return { "message":"Unauthorized request"}
         user = UserModel.query.get(id)
         if user is None:
@@ -92,6 +92,8 @@ class SignUpResource(Resource):
                 abort(500, error=f"Deletion for user {id} unsuccessful")
 
     def patch(self, id=None):
+        if current_user['role'] != 'member':
+            return { "message":"Unauthorized request"}
         data = SignUpResource.parser.parse_args()
         user = UserModel.query.filter_by(id=id).first()
         if user is None:

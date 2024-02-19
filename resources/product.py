@@ -53,7 +53,6 @@ class Product(Resource):
             db.session.commit()
             return product, 200
         
-           
 
     @marshal_with(product_fields)
     def put(self, id):
@@ -67,8 +66,6 @@ class Product(Resource):
         db.session.commit()
         return product
         
-    
-
   
     @marshal_with(product_fields)
     def delete(self, product_id):
