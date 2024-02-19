@@ -5,7 +5,7 @@ from flask_restful import Api
 from models import db,UserModel
 from resources.category import Category,CategoryList
 from resources.user import SignUpResource,LoginResource
-from flask_jwt_extended import JWTManager,
+from flask_jwt_extended import JWTManager
 
 
 app = Flask(__name__)
