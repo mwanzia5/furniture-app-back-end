@@ -248,70 +248,60 @@ orders=[{
   "user_id": 1,
   "product_id": 1,
   "total_price": 67,
-  "payment_method": "cash",
   "status": "on-route"
 }, {
   "id": 2,
   "user_id": 2,
   "product_id": 2,
   "total_price": 82,
-  "payment_method": "m-pesa",
   "status": "on-route"
 }, {
   "id": 3,
   "user_id": 3,
   "product_id": 3,
   "total_price": 49,
-  "payment_method": "cash",
   "status": "pending"
 }, {
   "id": 4,
   "user_id": 4,
   "product_id": 4,
   "total_price": 52,
-  "payment_method": "cash",
   "status": "deliverd"
 }, {
   "id": 5,
   "user_id": 5,
   "product_id": 5,
   "total_price": 2,
-  "payment_method": "cash",
   "status": "pending"
 }, {
   "id": 6,
   "user_id": 6,
   "product_id": 6,
   "total_price": 20,
-  "payment_method": "m-pesa",
   "status": "deliverd"
 }, {
   "id": 7,
   "user_id": 7,
   "product_id": 7,
   "total_price": 34,
-  "payment_method": "m-pesa",
   "status": "pending"
 }, {
   "id": 8,
   "user_id": 8,
   "product_id": 8,
   "total_price": 57,
-  "payment_method": "m-pesa",
   "status": "pending"
 }, {
   "id": 9,
   "user_id": 9,
   "product_id": 9,
   "total_price": 27,
-  "payment_method": "cash",
   "status": "deliverd"
 }, {
   "id": 10,
   "user_id": 10,
   "product_id": 10,
   "total_price": 37,
-  "payment_method": "cash",
   "status": "pending"
 }]
 
