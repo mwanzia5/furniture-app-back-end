@@ -26,7 +26,8 @@ class ProductModel (db.Model):
     price=db.Column(db.Float,nullable=False)
     reviews=db.relationship("ReviewModel",backref="products",lazy=True)
     category_id=db.Column(db.Integer,db.ForeignKey("categories.id"),nullable=False)
-    orders=db.relationship("OrderModel",backref="products",lazy=True)
+    orders=db.relationship("OrderModel",backref="products",lazy=True,)
+   
     
 class CategoryModel(db.Model):
     __tablename__="categories"   
