@@ -1,6 +1,23 @@
+
+from flask import Flask
+from flask_restful import Api
+
 from flask import Flask, jsonify, request
+
 from flask_migrate import Migrate
+from flask_bcrypt import Bcrypt
+from flask_restful import Api
+from models import db,UserModel
+from resources.category import Category,CategoryList
+from resources.user import SignUpResource,LoginResource
+from resources.order import Order
+from resources.review import ReviewResource
+from flask_jwt_extended import JWTManager
+
 from models import db
+
+app = Flask(__name__)
+
 
 app= Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] ='sqlite:///data.db'
@@ -30,6 +47,8 @@ api.add_resource(LoginResource, '/login')
 api.add_resource(CategoryList, '/categorylist')
 api.add_resource(Category, '/category', '/category/<int:category_id>')
 
+api.add_resource(ReviewList, '/review') 
+api.add_resource(Review_id,'/review','/review/<int:review_id>')
 
 consumer_key = 'FhrGbobA03pQ7Ge6OSXCH8V4SJtmU9zeVqohmHdQBzNhpeyE'
 consumer_secret = 'oysGKHLV5qsTzdblj7BAiYJMXFr5ooJT6kBZun9y18f1Bw6jt1KGyd541VmGGun2'
@@ -204,6 +223,10 @@ def simulate():
     return simulate_response.json()
 
 api.add_resource(Order,'/orders','/orders/<int:id>')
+
+api=Api(app)
+ 
+  
 
 if __name__ == '__main__':
 
