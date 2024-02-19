@@ -1,23 +1,39 @@
 from flask import Flask, jsonify, request
 from flask_migrate import Migrate
+from flask_bcrypt import Bcrypt
 from flask_restful import Api
-from models import db,PaymentModel
-from requests.auth import HTTPBasicAuth
-import requests
-from datetime import datetime
+from models import db,UserModel
+from resources.category import Category,CategoryList
+from resources.user import SignUpResource,LoginResource
+from flask_jwt_extended import JWTManager
 
-from resources.order import Order
 
 app = Flask(__name__)
-api = Api(app)
 
 
+# Configure database URI and disable track modifications
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['JWT_SECRET_KEY'] = "jwt-secret"
 
-migrate = Migrate(app, db)
+migrations=Migrate(app,db)
+
 
 db.init_app(app)
+api=Api(app)
+bcrypt=Bcrypt(app)
+jwt=JWTManager(app)
+
+@jwt.user_lookup_loader
+def user_lookup_callback(_jwt_header, jwt_data):
+    identity = jwt_data["sub"]
+    return UserModel.query.filter_by(id=identity).one_or_none().to_json()
+
+api.add_resource(SignUpResource, '/users', '/users/<int:id>')
+api.add_resource(LoginResource, '/login')
+
+api.add_resource(CategoryList, '/categorylist')
+api.add_resource(Category, '/category', '/category/<int:category_id>')
 
 consumer_key = 'FhrGbobA03pQ7Ge6OSXCH8V4SJtmU9zeVqohmHdQBzNhpeyE'
 consumer_secret = 'oysGKHLV5qsTzdblj7BAiYJMXFr5ooJT6kBZun9y18f1Bw6jt1KGyd541VmGGun2'

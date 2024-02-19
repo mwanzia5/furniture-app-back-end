@@ -1,4 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import check_password_hash
+
 from sqlalchemy.orm import validates
 
 db=SQLAlchemy()
@@ -8,7 +10,7 @@ class UserModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    phone_number=db.Column(db.BigInteger,unique=True)
+    phone_number=db.Column(db.String(),unique=True)
     role=db.Column(db.String(30))
     password = db.Column(db.String(64))
     created_at=db.Column(db.TIMESTAMP(),default=db.func.now())
@@ -17,6 +19,14 @@ class UserModel(db.Model):
     reviews=db.relationship("ReviewModel", backref="users", lazy=True)
     orders=db.relationship("OrderModel",backref="users",lazy=True)
  
+    def check_password(self, plain_password):
+        return check_password_hash(self.password, plain_password)
+
+    def to_json(self):
+        return {
+            'id': self.id,
+            'role': self.role,
+        }
     
 class ProductModel (db.Model):
     __tablename__="products"
@@ -27,7 +37,8 @@ class ProductModel (db.Model):
     price=db.Column(db.Float,nullable=False)
     reviews=db.relationship("ReviewModel",backref="products",lazy=True)
     category_id=db.Column(db.Integer,db.ForeignKey("categories.id"),nullable=False)
-    orders=db.relationship("OrderModel",backref="products",lazy=True)
+    orders=db.relationship("OrderModel",backref="products",lazy=True,)
+   
     
 class CategoryModel(db.Model):
     __tablename__="categories"   
@@ -52,7 +63,6 @@ class OrderModel(db.Model):
     total_price=db.Column(db.Float,nullable=False)
     status=db.Column(db.String,nullable=False)
     order_at=db.Column(db.TIMESTAMP(),default=db.func.now())
-
     payment = db.relationship('PaymentModel', backref='orders')
     
 class PaymentModel(db.Model):
