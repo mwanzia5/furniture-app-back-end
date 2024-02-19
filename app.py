@@ -5,6 +5,8 @@ from flask_restful import Api
 from models import db,UserModel
 from resources.category import Category,CategoryList
 from resources.user import SignUpResource,LoginResource
+from resources.order import Order
+from resources.review import ReviewResource
 from flask_jwt_extended import JWTManager
 
 
@@ -34,6 +36,7 @@ api.add_resource(LoginResource, '/login')
 
 api.add_resource(CategoryList, '/categorylist')
 api.add_resource(Category, '/category', '/category/<int:category_id>')
+
 
 consumer_key = 'FhrGbobA03pQ7Ge6OSXCH8V4SJtmU9zeVqohmHdQBzNhpeyE'
 consumer_secret = 'oysGKHLV5qsTzdblj7BAiYJMXFr5ooJT6kBZun9y18f1Bw6jt1KGyd541VmGGun2'
