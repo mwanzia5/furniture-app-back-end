@@ -7,6 +7,8 @@ pip install flask
 pip install flask_sqlalchemy
 pip install flask_migrate
 pip install flask_restful
+pip install -U flask_cors
+pip install flask bcrypt, flask_jwt_extended,
 
                                   files
 models.py to house the difrent tables of the backend
