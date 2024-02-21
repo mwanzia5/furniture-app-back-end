@@ -10,6 +10,7 @@ product_fields = {
     "price":fields.Float,
     "user_id":fields.Integer,
     "category_id":fields.Integer,
+    "image_url":fields.String
     }
 
 class ProductList(Resource):
@@ -30,6 +31,7 @@ class Product(Resource):
         self.parser.add_argument('description', type=str, help='This field cannot be blank', required=True)
         self.parser.add_argument('price', type=float, help='This field cannot be blank', required=True)
         self.parser.add_argument('category_id', type=int, help='This field cannot be blank', required=True)
+        self.parser.add_argument('image_url', type=str, help='This field cannot be blank', required=True)
 
     @marshal_with(product_fields)
     def get(self, id=None, user_id=None):
@@ -49,8 +51,8 @@ class Product(Resource):
 
     @jwt_required()
     def post(self):
-        if current_user['role'] != 'admin':
-            return { "message":"Unauthorized request"}
+        # if current_user['role'] != 'admin':
+        #     return { "message":"Unauthorized request"}
         args = self.parser.parse_args()
         #checks if the product already exists
         existing_product = ProductModel.query.filter_by(title=args['title']).first()
@@ -71,6 +73,7 @@ class Product(Resource):
         if product is None:
             abort(404, error="Product not found")
         product.title = data["title"]
+        product.image_url = data["image_url"]
         product.description = data['description']
         product.price = data['price']
         try:
