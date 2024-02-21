@@ -1,5 +1,6 @@
-from models import OrderModel,db
+from models import OrderModel, db
 from flask_restful import Resource,fields,marshal,reqparse
+from flask_jwt_extended import jwt_required,  current_user
 
 order_fields = {
     "id": fields.Integer,
@@ -15,9 +16,10 @@ class Order(Resource):
     order_parser.add_argument('total_price', required=True, help='Total price is required')
     order_parser.add_argument('status', required=True, help='Status is required')
 
-
-
+    @jwt_required()
     def get(self,id=None):
+        if current_user['role'] != 'member':
+            return { "message":"Unauthorized request"}
         if id:
             order = OrderModel.query.filter_by(id=id).first()
             if order == OrderModel:
@@ -26,12 +28,13 @@ class Order(Resource):
         else:
             orders = OrderModel.query.all()
             return marshal(orders,order_fields)
-    
+    @jwt_required()
     def post(self):
+        if current_user['role'] != 'member':
+            return { "message":"Unauthorized request"}
         data = Order.order_parser.parse_args()
 
         order = OrderModel(**data)
-
 
     
         db.session.add(order)
@@ -40,7 +43,10 @@ class Order(Resource):
         return {"message":"Order created successfully"}
         
 
+    @jwt_required()
     def patch(self,id):
+        if current_user['role'] != 'member':
+            return { "message":"Unauthorized request"}
         data = Order.order_parser.parse_args()
         order = OrderModel.query.get(id)
 
@@ -57,8 +63,10 @@ class Order(Resource):
         else:
             return {"message":"Order not found"}
 
+    @jwt_required()
     def delete(self,id):
-            
+        if current_user['role'] != 'member':
+            return { "message":"Unauthorized request"}
         order = OrderModel.query.get(id)
         if order:
             try:

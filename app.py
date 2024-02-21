@@ -5,14 +5,18 @@ from flask_restful import Api
 from flask import Flask, jsonify, request
 
 from flask_migrate import Migrate
+import requests
 from flask_bcrypt import Bcrypt
 from flask_restful import Api
-from models import db,UserModel
+from flask_jwt_extended import JWTManager
+from flask_cors import CORS
+from models import db,UserModel, PaymentModel
 from resources.category import Category,CategoryList
 from resources.user import SignUpResource,LoginResource
 from resources.order import Order
-from resources.review import ReviewResource
-from flask_jwt_extended import JWTManager
+from resources.review import Review_id, ReviewList
+from resources.product import Product, ProductList
+
 
 from models import db
 
@@ -22,17 +26,15 @@ app = Flask(__name__)
 app= Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] ='sqlite:///data.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config["JWT_SECRET_KEY"] = "super-secret"
 
 
 migrations=Migrate(app,db)
 api=Api(app)
+CORS(app)
 
 
 db.init_app(app)
-
-api.add_resource(ProductList, '/product')
-api.add_resource(Product, '/product', '/product/<int:product_id>')
-api=Api(app)
 bcrypt=Bcrypt(app)
 jwt=JWTManager(app)
 
@@ -43,9 +45,12 @@ def user_lookup_callback(_jwt_header, jwt_data):
 
 api.add_resource(SignUpResource, '/users', '/users/<int:id>')
 api.add_resource(LoginResource, '/login')
+#api.add_resource(ProtectedResource, '/protected')
 
 api.add_resource(CategoryList, '/categorylist')
 api.add_resource(Category, '/category', '/category/<int:category_id>')
+api.add_resource(ProductList, '/product')
+api.add_resource(Product, '/product', '/product/<int:id>','/product/users/<int:user_id>')
 
 api.add_resource(ReviewList, '/review') 
 api.add_resource(Review_id,'/review','/review/<int:review_id>')
@@ -223,8 +228,6 @@ def simulate():
     return simulate_response.json()
 
 api.add_resource(Order,'/orders','/orders/<int:id>')
-
-api=Api(app)
  
   
 
