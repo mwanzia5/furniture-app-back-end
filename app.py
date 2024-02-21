@@ -2,10 +2,9 @@
 from flask import Flask
 from flask_restful import Api
 
-from flask import Flask, jsonify, request
+from flask import Flask ,jsonify ,request
 
-from flask_migrate import Migrate
-import requests
+from flask_migrate import Migrate 
 from flask_bcrypt import Bcrypt
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
@@ -53,7 +52,7 @@ api.add_resource(ProductList, '/product')
 api.add_resource(Product, '/product', '/product/<int:id>','/product/users/<int:user_id>')
 
 api.add_resource(ReviewList, '/review') 
-api.add_resource(Review_id,'/review','/review/<int:review_id>')
+api.add_resource(Review_id,'/review','/review/<int:id>')
 
 consumer_key = 'FhrGbobA03pQ7Ge6OSXCH8V4SJtmU9zeVqohmHdQBzNhpeyE'
 consumer_secret = 'oysGKHLV5qsTzdblj7BAiYJMXFr5ooJT6kBZun9y18f1Bw6jt1KGyd541VmGGun2'
@@ -72,7 +71,7 @@ def get_mpesa_access_token():
 @app.route('/access_token') 
 def access_token():
     mpesa_auth_url = 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials'
-    response = requests.get(mpesa_auth_url, auth=HTTPBasicAuth(consumer_key, consumer_secret))
+    response = request.get(mpesa_auth_url, auth=HTTPBasicAuth(consumer_key, consumer_secret))
     return response.json()
 
 # Route for creating payments
