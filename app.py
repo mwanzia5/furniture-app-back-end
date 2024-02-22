@@ -2,10 +2,16 @@ from flask import Flask, jsonify, request
 from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 from flask_restful import Api
-from models import db,UserModel
+from models import db,UserModel,PaymentModel
 from resources.category import Category,CategoryList
 from resources.user import SignUpResource,LoginResource
+from resources.order import Order
 from flask_jwt_extended import JWTManager
+import requests
+from flask_cors import CORS
+from requests.auth import HTTPBasicAuth
+from datetime import datetime
+
 
 
 app = Flask(__name__)
@@ -23,6 +29,9 @@ db.init_app(app)
 api=Api(app)
 bcrypt=Bcrypt(app)
 jwt=JWTManager(app)
+
+CORS(app)
+
 
 @jwt.user_lookup_loader
 def user_lookup_callback(_jwt_header, jwt_data):
