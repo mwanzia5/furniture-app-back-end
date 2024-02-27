@@ -71,7 +71,9 @@ class SignUpResource(Resource):
             abort(500, error="Unsuccessful creation")
 
 
+
     #@jwt_required()
+
     def delete(self, id):
         # if current_user['role'] != 'member':
         #     return { "message":"Unauthorized request"}
