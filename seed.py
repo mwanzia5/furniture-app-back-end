@@ -36,7 +36,7 @@ users=[{
   "email": "hmatz4@mlb.com",
   "phone_number": "942-904-6178",
   "role": "member",
-  "password": "qO8(59FfGW"
+  "password": "qO8(59FfGW)"
 
 }, {
   "id": 6,
@@ -83,102 +83,122 @@ products=[{
   "title": "Reilly Inc",
   "description": "Switchable content-based hub",
   "price": 83,
-  "category_id": 1
+  "category_id": 1,
+  "image_url": "https://media.istockphoto.com/id/172410116/photo/simple-classical-wooden-chair-isolated-on-white-background-studio-shot.jpg?s=612x612&w=0&k=20&c=yIZRp7jvXhSoQ9ug--6nvoNoYo7fTeNbtwWgz1YjaR0="
 }, {
   "id": 2,
   "user_id": 2,
   "title": "Glover, Schmitt and O'Reilly",
   "description": "Centralized full-range model",
   "price": 44,
-  "category_id": 2
+  "category_id": 2,
+  "image_url": "https://media.istockphoto.com/id/172410116/photo/simple-classical-wooden-chair-isolated-on-white-background-studio-shot.jpg?s=612x612&w=0&k=20&c=yIZRp7jvXhSoQ9ug--6nvoNoYo7fTeNbtwWgz1YjaR0="
 }, {
   "id": 3,
   "user_id": 3,
   "title": "Rosenbaum-Wintheiser",
   "description": "Multi-channelled encompassing frame",
   "price": 63,
-  "category_id": 3
+  "category_id": 3,
+  "image_url": "https://media.istockphoto.com/id/172410116/photo/simple-classical-wooden-chair-isolated-on-white-background-studio-shot.jpg?s=612x612&w=0&k=20&c=yIZRp7jvXhSoQ9ug--6nvoNoYo7fTeNbtwWgz1YjaR0="
 }, {
   "id": 4,
   "user_id": 4,
   "title": "Ernser, Murray and Rohan",
   "description": "Customer-focused grid-enabled synergy",
   "price": 42,
-  "category_id": 4
+  "category_id": 4,
+  "image_url": "https://media.istockphoto.com/id/172410116/photo/simple-classical-wooden-chair-isolated-on-white-background-studio-shot.jpg?s=612x612&w=0&k=20&c=yIZRp7jvXhSoQ9ug--6nvoNoYo7fTeNbtwWgz1YjaR0="
 }, {
   "id": 5,
   "user_id": 5,
   "title": "Satterfield, Gutkowski and Spinka",
   "description": "Managed encompassing groupware",
   "price": 68,
-  "category_id": 5
+  "category_id": 5,
+  "image_url": "https://media.istockphoto.com/id/172410116/photo/simple-classical-wooden-chair-isolated-on-white-background-studio-shot.jpg?s=612x612&w=0&k=20&c=yIZRp7jvXhSoQ9ug--6nvoNoYo7fTeNbtwWgz1YjaR0="
 }, {
   "id": 6,
   "user_id": 6,
   "title": "Dibbert-Braun",
   "description": "Reactive responsive architecture",
   "price": 91,
-  "category_id": 6
+  "category_id": 6,
+  "image_url": "https://media.istockphoto.com/id/172410116/photo/simple-classical-wooden-chair-isolated-on-white-background-studio-shot.jpg?s=612x612&w=0&k=20&c=yIZRp7jvXhSoQ9ug--6nvoNoYo7fTeNbtwWgz1YjaR0="
 }, {
   "id": 7,
   "user_id": 7,
   "title": "Schuster-Wiza",
   "description": "Inverse tangible model",
   "price": 83,
-  "category_id": 7
+  "category_id": 7,
+  "image_url": "https://media.istockphoto.com/id/172410116/photo/simple-classical-wooden-chair-isolated-on-white-background-studio-shot.jpg?s=612x612&w=0&k=20&c=yIZRp7jvXhSoQ9ug--6nvoNoYo7fTeNbtwWgz1YjaR0="
 }, {
   "id": 8,
   "user_id": 8,
   "title": "Zboncak-Leuschke",
   "description": "Persevering optimal forecast",
   "price": 83,
-  "category_id": 8
+  "category_id": 8,
+  "image_url":"https://media.istockphoto.com/id/172410116/photo/simple-classical-wooden-chair-isolated-on-white-background-studio-shot.jpg?s=612x612&w=0&k=20&c=yIZRp7jvXhSoQ9ug--6nvoNoYo7fTeNbtwWgz1YjaR0="
 }, {
   "id": 9,
   "user_id": 9,
   "title": "Dickinson, Trantow and Brown",
   "description": "Up-sized asynchronous collaboration",
   "price": 30,
-  "category_id": 9
+  "category_id": 9,
+  "image_url": "https://media.istockphoto.com/id/172410116/photo/simple-classical-wooden-chair-isolated-on-white-background-studio-shot.jpg?s=612x612&w=0&k=20&c=yIZRp7jvXhSoQ9ug--6nvoNoYo7fTeNbtwWgz1YjaR0="
 }, {
   "id": 10,
   "user_id": 10,
   "title": "Gleason LLC",
   "description": "Reactive contextually-based encryption",
   "price": 31,
-  "category_id": 10
+  "category_id": 10,
+  "image_url": "https://media.istockphoto.com/id/172410116/photo/simple-classical-wooden-chair-isolated-on-white-background-studio-shot.jpg?s=612x612&w=0&k=20&c=yIZRp7jvXhSoQ9ug--6nvoNoYo7fTeNbtwWgz1YjaR0="
 }]
 
 categories=[{
   "id": 1,
-  "name": "Domainer"
+  "name": "Domainer",
+  "image_url": "https://media.istockphoto.com/id/172410116/photo/simple-classical-wooden-chair-isolated-on-white-background-studio-shot.jpg?s=612x612&w=0&k=20&c=yIZRp7jvXhSoQ9ug--6nvoNoYo7fTeNbtwWgz1YjaR0="
 }, {
   "id": 2,
-  "name": "Bigtax"
+  "name": "Bigtax",
+  "image_url": "https://media.istockphoto.com/id/172410116/photo/simple-classical-wooden-chair-isolated-on-white-background-studio-shot.jpg?s=612x612&w=0&k=20&c=yIZRp7jvXhSoQ9ug--6nvoNoYo7fTeNbtwWgz1YjaR0="
 }, {
   "id": 3,
-  "name": "Redhold"
+  "name": "Redhold",
+  "image_url": "https://media.istockphoto.com/id/172410116/photo/simple-classical-wooden-chair-isolated-on-white-background-studio-shot.jpg?s=612x612&w=0&k=20&c=yIZRp7jvXhSoQ9ug--6nvoNoYo7fTeNbtwWgz1YjaR0="
 }, {
   "id": 4,
-  "name": "Konklux"
+  "name": "Konklux",
+  "image_url": "https://media.istockphoto.com/id/172410116/photo/simple-classical-wooden-chair-isolated-on-white-background-studio-shot.jpg?s=612x612&w=0&k=20&c=yIZRp7jvXhSoQ9ug--6nvoNoYo7fTeNbtwWgz1YjaR0="
 }, {
   "id": 5,
-  "name": "Regrant"
+  "name": "Regrant",
+  "image_url": "https://media.istockphoto.com/id/172410116/photo/simple-classical-wooden-chair-isolated-on-white-background-studio-shot.jpg?s=612x612&w=0&k=20&c=yIZRp7jvXhSoQ9ug--6nvoNoYo7fTeNbtwWgz1YjaR0="
 }, {
   "id": 6,
-  "name": "Greenlam"
+  "name": "Greenlam",
+  "image_url": "https://media.istockphoto.com/id/172410116/photo/simple-classical-wooden-chair-isolated-on-white-background-studio-shot.jpg?s=612x612&w=0&k=20&c=yIZRp7jvXhSoQ9ug--6nvoNoYo7fTeNbtwWgz1YjaR0="
 }, {
   "id": 7,
-  "name": "Y-Solowarm"
+  "name": "Y-Solowarm",
+  "image_url": "https://media.istockphoto.com/id/172410116/photo/simple-classical-wooden-chair-isolated-on-white-background-studio-shot.jpg?s=612x612&w=0&k=20&c=yIZRp7jvXhSoQ9ug--6nvoNoYo7fTeNbtwWgz1YjaR0="
 }, {
   "id": 8,
-  "name": "Vagram"
+  "name": "Vagram",
+  "image_url": "https://media.istockphoto.com/id/172410116/photo/simple-classical-wooden-chair-isolated-on-white-background-studio-shot.jpg?s=612x612&w=0&k=20&c=yIZRp7jvXhSoQ9ug--6nvoNoYo7fTeNbtwWgz1YjaR0="
 }, {
   "id": 9,
-  "name": "Temp"
+  "name": "Temp",
+  "image_url": "https://media.istockphoto.com/id/172410116/photo/simple-classical-wooden-chair-isolated-on-white-background-studio-shot.jpg?s=612x612&w=0&k=20&c=yIZRp7jvXhSoQ9ug--6nvoNoYo7fTeNbtwWgz1YjaR0="
 }, {
   "id": 10,
-  "name": "Wrapsafe"
+  "name": "Wrapsafe",
+  "image_url": "https://media.istockphoto.com/id/172410116/photo/simple-classical-wooden-chair-isolated-on-white-background-studio-shot.jpg?s=612x612&w=0&k=20&c=yIZRp7jvXhSoQ9ug--6nvoNoYo7fTeNbtwWgz1YjaR0="
 }]
 
 

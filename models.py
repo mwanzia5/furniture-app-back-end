@@ -35,15 +35,18 @@ class ProductModel (db.Model):
     title=db.Column(db.String(80),nullable=False)
     description=db.Column(db.Text,nullable=False)
     price=db.Column(db.Float,nullable=False)
+    image_url=db.Column(db.String, nullable=False)
     reviews=db.relationship("ReviewModel",backref="products",lazy=True)
     category_id=db.Column(db.Integer,db.ForeignKey("categories.id"),nullable=False)
-    orders=db.relationship("OrderModel",backref="products",lazy=True,)
+    # orders=db.relationship("OrderModel",backref="products",lazy=True)
+    orders=db.relationship("OrderModel",backref="products",lazy=True,cascade="all, delete-orphan",)
    
     
 class CategoryModel(db.Model):
     __tablename__="categories"   
     id=db.Column(db.Integer,primary_key=True)
     name=db.Column(db.String(50),nullable=False)
+    image_url=db.Column(db.String, nullable=False)
     products=db.relationship("ProductModel",backref="categories",lazy=True)
 
 

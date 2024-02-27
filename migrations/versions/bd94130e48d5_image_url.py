@@ -1,8 +1,8 @@
-"""payments
+"""image url
 
-Revision ID: e7e00c242a26
+Revision ID: bd94130e48d5
 Revises: 
-Create Date: 2024-02-19 12:32:04.104276
+Create Date: 2024-02-21 13:43:53.110316
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'e7e00c242a26'
+revision = 'bd94130e48d5'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,13 +21,14 @@ def upgrade():
     op.create_table('categories',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=50), nullable=False),
+    sa.Column('image_url', sa.String(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('username', sa.String(length=64), nullable=False),
     sa.Column('email', sa.String(length=120), nullable=False),
-    sa.Column('phone_number', sa.BigInteger(), nullable=True),
+    sa.Column('phone_number', sa.String(), nullable=True),
     sa.Column('role', sa.String(length=30), nullable=True),
     sa.Column('password', sa.String(length=64), nullable=True),
     sa.Column('created_at', sa.TIMESTAMP(), nullable=True),
@@ -43,6 +44,7 @@ def upgrade():
     sa.Column('title', sa.String(length=80), nullable=False),
     sa.Column('description', sa.Text(), nullable=False),
     sa.Column('price', sa.Float(), nullable=False),
+    sa.Column('image_url', sa.String(), nullable=False),
     sa.Column('category_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['category_id'], ['categories.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
