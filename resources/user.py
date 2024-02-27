@@ -70,10 +70,10 @@ class SignUpResource(Resource):
             abort(500, error="Unsuccessful creation")
 
 
-    @jwt_required()
+    # @jwt_required()
     def delete(self, id):
-        if current_user['role'] != 'member':
-            return { "message":"Unauthorized request"}
+        # if current_user['role'] != 'member':
+        #     return { "message":"Unauthorized request"}
         user = UserModel.query.get(id)
         if user is None:
             abort(404, error="User not found")            
