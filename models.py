@@ -12,7 +12,7 @@ class UserModel(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     phone_number=db.Column(db.String(),unique=True)
     address = db.Column(db.String(64))
-    role=db.Column(db.String(30), default='member')
+    role=db.Column(db.String(30), server_default='member')
     password = db.Column(db.String(64))
     created_at=db.Column(db.TIMESTAMP(),default=db.func.now())
     updated_at=db.Column(db.TIMESTAMP(),onupdate=db.func.now())
