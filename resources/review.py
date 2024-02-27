@@ -27,6 +27,15 @@ class ReviewList(Resource):
         reviews = ReviewModel.query.all()
         return reviews
     
+    @marshal_with(reviews_fields)
+    def post(self):
+        args = self.reviews_parser.parse_args()
+    
+        review = ReviewModel(**args)
+        db.session.add(review)
+        db.session.commit()
+        return review, 201
+    
 class Review_id(Resource):
     reviews_parser = reqparse.RequestParser()
     reviews_parser.add_argument('text', required=True, help='Text is required')
@@ -41,15 +50,5 @@ class Review_id(Resource):
        else:
            abort(404, message="review not found")
 
-    @marshal_with(reviews_fields)
-    def post(self):
-       args = self.parser.parse_args()
-       existing_review= ReviewModel.query.filter_by(text=args['text']).first()
-       if existing_review:
-           abort(409, message="review already exists")
-       else:
-           review = ReviewModel(**args)
-           db.session.add(review)
-           db.session.commit()
-           return review, 201
+    
 

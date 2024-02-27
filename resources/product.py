@@ -51,8 +51,8 @@ class Product(Resource):
 
     @jwt_required()
     def post(self):
-        # if current_user['role'] != 'admin':
-        #     return { "message":"Unauthorized request"}
+        if current_user['role'] != 'admin':
+            return { "message":"Unauthorized request"}
         args = self.parser.parse_args()
         #checks if the product already exists
         existing_product = ProductModel.query.filter_by(title=args['title']).first()
