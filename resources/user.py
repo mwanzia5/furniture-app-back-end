@@ -28,6 +28,7 @@ class SignUpResource(Resource):
     parser.add_argument('username', required=True, help="Username is required")
     parser.add_argument('email',  required=True, help="Email is required")
     parser.add_argument('phone_number', required=True, help="Phone number is required")
+    parser.add_argument('address', required=True, help="Address is required")
     parser.add_argument('role', type=str, required=False, help="Role is required")
     parser.add_argument('password', required=True, help="Password is required")
 
@@ -48,10 +49,10 @@ class SignUpResource(Resource):
     def post(self):
         data = SignUpResource.parser.parse_args()
         data['password'] = generate_password_hash(data['password'])
-        
-        valid_roles = ['member', 'admin']
-        if data['role'].lower() not in valid_roles:
-            abort(400, error="Invalid role. Allowed roles are 'member' or 'admin'.")
+        data['role']= 'member'
+        # valid_roles = ['member', 'admin']
+        # if data['role'].lower() not in valid_roles:
+        #     abort(400, error="Invalid role. Allowed roles are 'member' or 'admin'.")
 
         user = UserModel(**data)
         email = UserModel.query.filter_by(email=data['email']).first()
@@ -70,10 +71,10 @@ class SignUpResource(Resource):
             abort(500, error="Unsuccessful creation")
 
 
-    @jwt_required()
+    #@jwt_required()
     def delete(self, id):
-        if current_user['role'] != 'member':
-            return { "message":"Unauthorized request"}
+        # if current_user['role'] != 'member':
+        #     return { "message":"Unauthorized request"}
         user = UserModel.query.get(id)
         if user is None:
             abort(404, error="User not found")            
@@ -95,6 +96,7 @@ class SignUpResource(Resource):
         user.username = data['username']
         user.email = data['email']
         user.phone_number = data['phone_number']
+        user.address = data['address']
         user.password = data['password']
         try:
             db.session.commit()
