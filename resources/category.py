@@ -4,7 +4,8 @@ from flask_restful import Resource, fields, marshal_with, reqparse, abort
 # Define fields to be returned in the response
 category_fields = {
     "id": fields.Integer,
-    "name": fields.String
+    "name": fields.String,
+    "image_url":fields.String
 }
 
 # Define a resource to handle requests for retrieving all categories
@@ -21,6 +22,7 @@ class Category(Resource):
         
         self.parser = reqparse.RequestParser()
         self.parser.add_argument('name', type=str, help="This field cannot be blank.", required=True)
+        self.parser.add_argument('image_url', type=str, help='This field cannot be blank', required=True)
 
     @marshal_with(category_fields)
     def get(self, category_id):
@@ -56,6 +58,7 @@ class Category(Resource):
         args = self.parser.parse_args()
         # Update the name of the category with the provided name
         category.name = args["name"]
+        category.image_url = args["image_url"]
         # Commit the changes to the database
         db.session.commit()
         # Return the updated category
