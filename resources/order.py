@@ -25,8 +25,6 @@ class Order(Resource):
     order_parser.add_argument('email', required=True, help='Email is required') 
 
 
-    def get(self, id=None):
-
     @jwt_required()
     def get(self,id=None):
         if current_user['role'] != 'member':
@@ -44,7 +42,7 @@ class Order(Resource):
             return marshal(orders, order_fields)
 
 
-            return marshal(orders,order_fields)
+            
     @jwt_required()
 
     def post(self):
@@ -64,7 +62,6 @@ class Order(Resource):
 
         return {"message": "Order created successfully and invoice sent"}
 
-    def patch(self, id):
 
     @jwt_required()
     def patch(self,id):
@@ -85,8 +82,6 @@ class Order(Resource):
         else:
             return {"message": "Order not found"}
 
-
-    def delete(self, id):
 
     @jwt_required()
     def delete(self,id):
