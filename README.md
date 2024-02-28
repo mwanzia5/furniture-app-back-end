@@ -1,5 +1,5 @@
                                       STEPS
-create the vertual environment using the command python3 -m venv.venv
+create the virtual environment using the command python3 -m venv.venv
 enter in to the environment using the command source .venv/bin/activate
 
                                    INSTALATIONS
