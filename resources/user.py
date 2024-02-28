@@ -34,7 +34,7 @@ class SignUpResource(Resource):
     parser.add_argument('password', required=True, help="Password is required")
 
     @marshal_with(user_fields)
-    @jwt_required()
+    @jwt_required()     
     def get(self):
         current_user = get_jwt_identity()
         if current_user:
@@ -132,6 +132,7 @@ class LoginResource(Resource):
                return {"message": "invalid email/password", "status":"fail"}, 403
         else:
             return {"message": "invalid email/password", "status":"fail"}, 403
+
         
 
     # def admin_required(self):
