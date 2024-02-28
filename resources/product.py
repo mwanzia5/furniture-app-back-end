@@ -1,5 +1,9 @@
-from flask_restful import Resource, reqparse, fields, marshal_with, abort,request
+from flask_restful import Resource, reqparse, fields, marshal_with, abort
 from models import db, ProductModel
+import logging
+
+# Initialize logger
+logger = logging.getLogger(__name__)
 
 product_fields = {
     "id": fields.Integer, 
@@ -53,31 +57,30 @@ class Product(Resource):
             db.session.commit()
             return {"message": "Product created successfully"}
 
-  
-
     def put(self, id):
         data = request.get_json()
         product = ProductModel.query.get(id)
-        if product is None:
+        if not product:
             abort(404, error="Product not found")
+
         try:
             for key, value in data.items():  # Update each field individually
                 setattr(product, key, value)
             db.session.commit()
-            return {"message": f"product {id} updated successfully"}
+            return {"message": f"Product {id} updated successfully"}
         except Exception as e:
-            print(f"Error: {str(e)}")
+            logger.error(f"Error updating product {id}: {str(e)}")
             abort(500, error=f"Update for product {id} unsuccessful")
-
 
     def delete(self, id):
         product = ProductModel.query.get(id)
-        if product is None:
+        if not product:
             abort(404, error="Product not found")
+
         try:
             db.session.delete(product)
             db.session.commit()
             return {"message": f"Product {id} deleted successfully"}
         except Exception as e:
-            print(f"Error: {str(e)}")
+            logger.error(f"Error deleting product {id}: {str(e)}")
             abort(500, error=f"Deletion for product {id} unsuccessful")

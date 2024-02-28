@@ -6,13 +6,14 @@ from models import db,UserModel# ,PaymentModel
 from resources.category import Category,CategoryList
 from resources.user import SignUpResource,LoginResource
 from resources.order import Order
-from resources.product import Product
+from resources.product import Product,ProductList
 from flask_jwt_extended import JWTManager
 # import requests
 from flask_cors import CORS
 # from requests.auth import HTTPBasicAuth
 # from datetime import datetime
 from flask_mail import Mail
+from resources.review import ReviewList,Review_id
 
 
 
@@ -53,7 +54,10 @@ api.add_resource(LoginResource, '/login')
 
 api.add_resource(CategoryList, '/categorylist')
 api.add_resource(Category, '/category', '/category/<int:category_id>')
-api.add_resource(Product, '/product')
+api.add_resource(Product, '/product','/product/<int:id>') 
+api.add_resource(ProductList, '/products') 
+api.add_resource(ReviewList, '/reviews')
+api.add_resource(Review_id, '/reviews/<int:review_id>')
 api.add_resource(Order,'/orders','/orders/<int:id>')
 
 if __name__ == '__main__':
