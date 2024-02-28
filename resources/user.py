@@ -11,6 +11,7 @@ user_fields = {
     'id': fields.Integer,
     'username': fields.String,
     'email': fields.String,
+    'address': fields.String,
     'phone_number': fields.String,
     'role': fields.String,
     'created_at': fields.DateTime,
@@ -33,9 +34,11 @@ class SignUpResource(Resource):
     parser.add_argument('password', required=True, help="Password is required")
 
     @marshal_with(user_fields)
-    def get(self, id=None):
-        if id:
-            user=UserModel.query.filter_by(id=id).first()
+    @jwt_required()     
+    def get(self):
+        current_user = get_jwt_identity()
+        if current_user:
+            user=UserModel.query.filter_by(id=current_user).first()
             if user is not None:
                 return user, 200 
             else:
@@ -49,10 +52,10 @@ class SignUpResource(Resource):
     def post(self):
         data = SignUpResource.parser.parse_args()
         data['password'] = generate_password_hash(data['password'])
-        data['role']= 'member'
-        # valid_roles = ['member', 'admin']
-        # if data['role'].lower() not in valid_roles:
-        #     abort(400, error="Invalid role. Allowed roles are 'member' or 'admin'.")
+        # data['role']= 'member'
+        valid_roles = ['member', 'admin']
+        if data['role'].lower() not in valid_roles:
+            abort(400, error="Invalid role. Allowed roles are 'member' or 'admin'.")
 
         user = UserModel(**data)
         email = UserModel.query.filter_by(email=data['email']).first()
@@ -71,7 +74,9 @@ class SignUpResource(Resource):
             abort(500, error="Unsuccessful creation")
 
 
+
     #@jwt_required()
+
     def delete(self, id):
         # if current_user['role'] != 'member':
         #     return { "message":"Unauthorized request"}
@@ -129,6 +134,7 @@ class LoginResource(Resource):
                return {"message": "invalid email/password", "status":"fail"}, 403
         else:
             return {"message": "invalid email/password", "status":"fail"}, 403
+
         
 
     # def admin_required(self):
