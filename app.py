@@ -1,18 +1,7 @@
-
 from flask import Flask# , jsonify, request
-
-
-from flask import Flask
-from flask_restful import Api
-
-from flask import Flask, jsonify, request
-
-
 from flask_migrate import Migrate
-import requests
 from flask_bcrypt import Bcrypt
 from flask_restful import Api
-
 from models import db,UserModel# ,PaymentModel
 from resources.category import Category,CategoryList
 from resources.user import SignUpResource,LoginResource
@@ -26,42 +15,28 @@ from flask_cors import CORS
 from flask_mail import Mail
 
 
-from flask_jwt_extended import JWTManager
-from flask_cors import CORS
-from models import db,UserModel, PaymentModel
-from resources.category import Category,CategoryList
-from resources.user import SignUpResource,LoginResource
-from resources.order import Order
-from resources.review import Review_id, ReviewList
-from resources.product import Product, ProductList
-
-
-
-from models import db
 
 app = Flask(__name__)
 
 
-app= Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] ='sqlite:///data.db'
+# Configure database URI and disable track modifications
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config["JWT_SECRET_KEY"] = "super-secret"
-
+app.config['JWT_SECRET_KEY'] = "jwt-secret"
 
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'joyglory213@gmail.com@gmail.com'  
-app.config['MAIL_PASSWORD'] = 'your-gmail-password'   
+app.config['MAIL_USERNAME'] = 'furnituregareden32@gmail.com'  
+app.config['MAIL_PASSWORD'] = 'hasoxasnnvhjupec'   
 
 mail = Mail(app)
 
 migrations=Migrate(app,db)
-api=Api(app)
-CORS(app)
 
 
 db.init_app(app)
+api=Api(app)
 bcrypt=Bcrypt(app)
 jwt=JWTManager(app)
 
@@ -75,17 +50,14 @@ def user_lookup_callback(_jwt_header, jwt_data):
 
 api.add_resource(SignUpResource, '/users', '/users/<int:id>')
 api.add_resource(LoginResource, '/login')
-#api.add_resource(ProtectedResource, '/protected')
 
 api.add_resource(CategoryList, '/categorylist')
 api.add_resource(Category, '/category', '/category/<int:category_id>')
+api.add_resource(Product, '/product')
+api.add_resource(Order,'/orders','/orders/<int:id>')
 
-api.add_resource(ProductList, '/product')
-api.add_resource(Product, '/product', '/product/<int:id>','/product/users/<int:user_id>')
-
-api.add_resource(ReviewList, '/review') 
-api.add_resource(Review_id,'/review','/review/<int:review_id>')
-
+if __name__ == '__main__':
+    app.run(debug=True, port=5000)
 
 # consumer_key = 'FhrGbobA03pQ7Ge6OSXCH8V4SJtmU9zeVqohmHdQBzNhpeyE'
 # consumer_secret = 'oysGKHLV5qsTzdblj7BAiYJMXFr5ooJT6kBZun9y18f1Bw6jt1KGyd541VmGGun2'
@@ -259,12 +231,4 @@ api.add_resource(Review_id,'/review','/review/<int:review_id>')
 #     simulate_response = requests.post(mpesa_endpoint, json=request_body, headers=headers)
 #     return simulate_response.json()
 
-api.add_resource(Order,'/orders','/orders/<int:id>')
- 
-  
 
-if __name__ == '__main__':
-
-    with app.app_context():
-        db.create_all()
-    app.run(debug=True, port=5555)

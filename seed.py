@@ -327,9 +327,9 @@ orders=[{
 
 
 with app.app_context():
-    # db.session.add_all([UserModel(**user) for user in users])
-    # db.session.add_all([ProductModel(**product) for product in products])
-    # db.session.add_all([CategoryModel(**category) for category in categories])
-    # db.session.add_all([ReviewModel(**review) for review in reviews])
+    db.session.add_all([UserModel(**user) for user in users])
+    db.session.add_all([ProductModel(**product) for product in products])
+    db.session.add_all([CategoryModel(**category) for category in categories])
+    db.session.add_all([ReviewModel(**review) for review in reviews])
     db.session.add_all([OrderModel(**order) for order in orders])
     db.session.commit()

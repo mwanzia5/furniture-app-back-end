@@ -6,7 +6,7 @@ from models import db, OrderModel, ProductModel, UserModel
 
 from models import OrderModel, db
 from flask_restful import Resource,fields,marshal,reqparse
-from flask_jwt_extended import jwt_required,  current_user
+from flask_jwt_extended import jwt_required,  current_user,get_jwt_identity
 
 
 order_fields = {
@@ -20,15 +20,15 @@ order_fields = {
 
 class Order(Resource):
     order_parser = reqparse.RequestParser()
-    order_parser.add_argument('total_price', required=True, help='Total price is required')
-    order_parser.add_argument('status', required=True, help='Status is required')
-    order_parser.add_argument('email', required=True, help='Email is required') 
+    # order_parser.add_argument('total_price', required=True, help='Total price is required')
+    # order_parser.add_argument('status', required=True, help='Status is required')
+    # order_parser.add_argument('email', required=True, help='Email is required') 
 
 
     @jwt_required()
     def get(self,id=None):
-        if current_user['role'] != 'member':
-            return { "message":"Unauthorized request"}
+        # if current_user['role'] != 'member':
+        #     return { "message":"Unauthorized request"}
 
         if id:
             order = OrderModel.query.get(id)
@@ -46,9 +46,15 @@ class Order(Resource):
     @jwt_required()
 
     def post(self):
-        if current_user['role'] != 'member':
+        current_user = get_jwt_identity()
+        order = OrderModel.query.get(id)
+        user = UserModel.query.filter_by(id=current_user).first()
+        email = user.email
+        print("User role:", user.role)
+        if user.role != 'member':
             return { "message":"Unauthorized request"}
         data = Order.order_parser.parse_args()
+        data['user_id'] = order.user_id
 
         order = OrderModel(**data)
 
@@ -57,7 +63,7 @@ class Order(Resource):
         db.session.commit()
 
         
-        self.send_invoice(data['email'], order)
+        self.send_invoice(email, order)
 
 
         return {"message": "Order created successfully and invoice sent"}
